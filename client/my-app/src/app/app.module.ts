@@ -1,22 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './component/home/home.component';
+import { HttpClientModule } from '@angular/common/http';
+import { Routes, RouterModule } from '@angular/router';
+import { NavComponent } from './component/nav/nav.component';
+import { ElectronicDeviceComponent } from './component/category/electronic-device/electronic-device.component';
 import { CategoryComponent } from './component/category/category.component';
-
+import { CategoryService } from './services/category/category.service';
+const route:Routes=[
+  // {path:"/",component:HomeComponent}
+  {path:"category",component:CategoryComponent}
+]
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    CategoryComponent
+    CategoryComponent,
+    NavComponent,
+    ElectronicDeviceComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    RouterModule.forRoot(route)
   ],
-  providers: [],
+  providers: [CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
