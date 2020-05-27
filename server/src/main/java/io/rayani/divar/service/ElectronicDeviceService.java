@@ -2,8 +2,11 @@ package io.rayani.divar.service;
 
 import io.rayani.divar.controller.Response.ElectronicDeviceResponse;
 import io.rayani.divar.entity.ElectronicDevice;
+import io.rayani.divar.exception.NotfoundException;
 import io.rayani.divar.reposiory.ElectronicDeviceRepository;
 import io.rayani.divar.util.ConvertDtoAndEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class ElectronicDeviceService {
-
+    private static final Logger LOGGER= LoggerFactory.getLogger(ElectronicDeviceService.class);
     private final ElectronicDeviceRepository electronicDeviceRepository;
     private final ConvertDtoAndEntity convertDtoAndEntity;
 
@@ -22,12 +25,35 @@ public class ElectronicDeviceService {
         this.convertDtoAndEntity = convertDtoAndEntity;
     }
 
-    public List<ElectronicDeviceResponse> getElectronicS() {
-        List<ElectronicDevice> electronicAll = electronicDeviceRepository.findAll();
-        List<ElectronicDeviceResponse> collect = electronicAll.stream().map(electronicDevice ->
-                (ElectronicDeviceResponse) convertDtoAndEntity.convertEntityDto(electronicDevice, new ElectronicDeviceResponse()))
-                .collect(Collectors.toList());
-        return collect;
+
+    public ElectronicDevice getElectronicDevice(Long id) {
+        return electronicDeviceRepository.findById(id).get();
+    }
+
+    public List<ElectronicDevice> getElectronics() {
+        return electronicDeviceRepository.findAll();
+    }
+
+    public List<ElectronicDeviceResponse> getElectronicDeviceByFk(Long id) {
+        LOGGER.info("Inside getElectronicDeviceByFk() with id: "+id);
+        List<ElectronicDevice> categoryList= electronicDeviceRepository.findByCategoryId(id);
+        //convert entities to dtos
+        List<ElectronicDeviceResponse> electronicDeviceResponseList = categoryList.stream().map(electronicDevice -> {
+            return (ElectronicDeviceResponse) convertDtoAndEntity.convertEntityDto(electronicDevice, new ElectronicDeviceResponse());
+        }).collect(Collectors.toList());
+        return electronicDeviceResponseList;
+    }
+
+    public ElectronicDeviceResponse getElectronicDeviceByIdAndFk(Long electId,Long categoryId) throws NotfoundException {
+        LOGGER.info(String.format("inside getElectronicDeviceByIdAndFk() with categoryId: %d and categoryId: %d",electId,categoryId));
+        //CONVERT category entity to dto
+        ElectronicDevice electronicDevice = electronicDeviceRepository
+                .findByIdAndCategoryId(electId,categoryId)
+                .orElseThrow(() -> {
+                    return new NotfoundException("this id doesn't exists => "+electId);
+                });
+        ElectronicDeviceResponse electronicDeviceResponse=(ElectronicDeviceResponse) convertDtoAndEntity.convertEntityDto(electronicDevice, new ElectronicDeviceResponse());
+        return electronicDeviceResponse;
     }
 }
 

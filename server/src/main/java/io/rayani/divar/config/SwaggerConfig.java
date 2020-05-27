@@ -22,7 +22,7 @@ public class SwaggerConfig {
 
         Docket docket =  new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.appsdeveloperblog.app.ws"))
+                .apis(RequestHandlerSelectors.basePackage("io.rayani"))
                 .paths(PathSelectors.any())
                 .build().apiInfo(metaData());
         return docket;

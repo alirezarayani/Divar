@@ -1,21 +1,14 @@
 package io.rayani.divar.service;
 
-import io.rayani.divar.entity.Category;
-import io.rayani.divar.reposiory.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import io.rayani.divar.controller.Response.CategoryResponse;
+import io.rayani.divar.exception.NotfoundException;
 
 import java.util.List;
 
-@Service
-public class CategoryService {
-    private final CategoryRepository categoryRepository;
-    @Autowired
-    public CategoryService(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
+public interface CategoryService {
 
-    public List<Category> getCategories() {
-        return categoryRepository.findAll();
-    }
+    public List<CategoryResponse> getAllCategories() ;
+
+    public CategoryResponse getCategoryById(Long id) throws NotfoundException;
+
 }
