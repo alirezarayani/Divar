@@ -1,1 +1,10 @@
-<p>electronic-device works!</p>
+<div class="container" *ngFor="let tempElectronic of electronics">
+    <div class="card" style="width:200px">
+        <img class="card-img-top" src="{{tempElectronic.pic}}" alt="Card image" style="width:100%">
+        <div class="card-body">
+            <h4 class="card-title">{{tempElectronic.deviceName}}</h4>
+            <p class="card-text">{{tempElectronic.description}}</p>
+            <a href="#" class="btn btn-primary">See Profile</a>
+        </div>
+    </div>
+</div>

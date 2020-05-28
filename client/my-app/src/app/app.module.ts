@@ -9,9 +9,13 @@ import { NavComponent } from './component/nav/nav.component';
 import { ElectronicDeviceComponent } from './component/category/electronic-device/electronic-device.component';
 import { CategoryComponent } from './component/category/category.component';
 import { CategoryService } from './services/category/category.service';
+import { ElectronicService } from './services/electronic/electronic.service';
 const route:Routes=[
-  // {path:"/",component:HomeComponent}
-  {path:"category",component:CategoryComponent}
+  {path:"",component:HomeComponent,children:[{
+   path:"electronic-devices",component:ElectronicDeviceComponent 
+  }]},
+ 
+  
 ]
 @NgModule({
   declarations: [
@@ -27,7 +31,7 @@ const route:Routes=[
     HttpClientModule,
     RouterModule.forRoot(route)
   ],
-  providers: [CategoryService],
+  providers: [CategoryService,ElectronicService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

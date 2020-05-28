@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/categories")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200",methods = RequestMethod.GET,maxAge = 36000)
 public class CategoryController {
     private static final Logger LOGGER= LoggerFactory.getLogger(CategoryController.class);
 

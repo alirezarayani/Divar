@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@CrossOrigin("http://localhost:4200")
-
 public interface ElectronicDeviceRepository extends JpaRepository<ElectronicDevice,Long> {
         List<ElectronicDevice> findByCategoryId(Long id);
         Optional<ElectronicDevice> findByIdAndCategoryId(Long electronicId, Long id);
