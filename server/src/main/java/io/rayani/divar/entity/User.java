@@ -1,11 +1,16 @@
 package io.rayani.divar.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sun.xml.bind.v2.TODO;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class User {
@@ -26,10 +31,11 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private String doublePassword;
-
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    @JoinColumn(name = "province_id")
+    @Transient
+    private String confirmPassword;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Province_id")
+    @JsonIgnoreProperties("users")
     private Province province;
     @CreationTimestamp
     private Date createdAt;
@@ -62,12 +68,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmil() {
+    public String getEmail() {
         return email;
     }
 
-    public void setEmil(String emil) {
-        this.email = emil;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -78,12 +84,13 @@ public class User {
         this.password = password;
     }
 
-    public String getDoublePassword() {
-        return doublePassword;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setDoublePassword(String doublePassword) {
-        this.doublePassword = doublePassword;
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Province getProvince() {

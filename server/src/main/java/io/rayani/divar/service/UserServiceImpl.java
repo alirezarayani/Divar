@@ -7,6 +7,8 @@ import io.rayani.divar.util.ConvertDtoAndEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -17,9 +19,12 @@ public class UserServiceImpl implements UserService {
         this.convert = convert;
     }
     @Override
-    public User getUserByEmail(String email) throws NotfoundException {
-        User user = userRepository.findByEmail(email).orElseThrow(() ->{ return new  NotfoundException("this email dosen't exist");} );
-        return user;
+    public Optional<User> getUserByEmail(String email)  {
+        Optional<User> user = userRepository.findByEmail(email);
+        if(user.isPresent()){
+            return user;
+        }
+        return Optional.empty();
     }
     @Override
     public List<User> getAllUsers() {
@@ -32,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
-        return null;
+        return userRepository.save(user);
     }
 
     @Override
@@ -44,5 +49,6 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(String email) {
 
     }
+
 
 }

@@ -16,4 +16,12 @@ public class GlobalExceptionHandler extends Exception{
         apiError.setError(HttpStatus.NOT_FOUND.toString());
         return new ResponseEntity<ApiError>(apiError,new HttpHeaders(),HttpStatus.OK);
     }
+    @ExceptionHandler(EmailIsExists.class)
+    public ResponseEntity<ApiError> IsEmailExists(EmailIsExists e){
+        ApiError apiError=new ApiError(HttpStatus.CONFLICT.value());
+        apiError.setMessage(e.getMessage());
+        apiError.setError(HttpStatus.NOT_FOUND.toString());
+        return new ResponseEntity<ApiError>(apiError,new HttpHeaders(), HttpStatus.CONFLICT);
+    }
+
 }
