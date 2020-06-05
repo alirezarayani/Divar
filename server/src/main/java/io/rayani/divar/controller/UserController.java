@@ -7,6 +7,7 @@ import io.rayani.divar.exception.NotfoundException;
 import io.rayani.divar.service.ProvinceService;
 import io.rayani.divar.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,16 +38,10 @@ public class UserController {
         return userByEmail.get();
     }
     @PostMapping("/user")
-    public User authentication(@RequestBody User user) throws NotfoundException {
-        Optional<? extends User> userByEmail = userService.getUserByEmail(user.getEmail().trim());
-        if (userByEmail.isPresent()) {
-            String encodeGetPassword = passwordEncoder.encode(user.getPassword());
-            if (encodeGetPassword.equals(user.getPassword())){
-                return userByEmail.get();
-            }
-        }
+    public UserDetails login(@RequestBody User user) throws NotfoundException {
+        UserDetails userDetails = userService.loadUserByUsername(user.getEmail());
 
-        throw new NotfoundException("this email doesn't exists");
+        return userDetails;
     }
     @PostMapping
     public User saveUser(@RequestBody User user)throws NotfoundException, EmailIsExists {
