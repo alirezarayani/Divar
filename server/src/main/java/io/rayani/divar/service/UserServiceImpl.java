@@ -1,16 +1,18 @@
 package io.rayani.divar.service;
 
+import io.rayani.divar.entity.ApplicationUser;
 import io.rayani.divar.entity.User;
-import io.rayani.divar.exception.NotfoundException;
 import io.rayani.divar.reposiory.UserRepository;
 import io.rayani.divar.util.ConvertDtoAndEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService  {
     private final UserRepository userRepository;
     private final ConvertDtoAndEntity convert;
 
@@ -26,6 +28,8 @@ public class UserServiceImpl implements UserService {
         }
         return Optional.empty();
     }
+
+
     @Override
     public List<User> getAllUsers() {
         return null;
@@ -50,5 +54,13 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() ->
+                        new UsernameNotFoundException(String.format("Username %s not found", email))
+                );
+        return new ApplicationUser(user);
 
+    }
 }

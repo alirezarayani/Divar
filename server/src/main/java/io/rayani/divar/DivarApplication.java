@@ -31,17 +31,6 @@ public class DivarApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        User user =new User();
-//        user.setFirstName("sad");
-//        user.setEmail("dsf@gmail.com");
-//        user.setLastName("dsfsd");
-//        user.setDoublePassword("dsfsd");
-//        user.setPassword("sdf");
-//       Province province1 = provinceService.getProvince(1L).get();
-//        List<Province> list=new ArrayList<>();
-//        list.add(province1);
-//       user.setProvinces(list);
-//       userService.saveUser(user);
 
     }
 }

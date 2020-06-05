@@ -5,9 +5,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class MyUserPrincipal implements UserDetails {
+public class ApplicationUser implements UserDetails {
     User user=null;
-    public MyUserPrincipal(User user){
+    public ApplicationUser(User user){
         this.user=user;
     }
     @Override

@@ -45,8 +45,6 @@ public class UserController {
     }
     @PostMapping
     public User saveUser(@RequestBody User user)throws NotfoundException, EmailIsExists {
-
-        Optional<Province> province = provinceService.getProvince(user.getId());
         Optional<? extends User> IsEmailExist = userService.getUserByEmail(user.getEmail().trim());
         if(IsEmailExist.isEmpty()){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
