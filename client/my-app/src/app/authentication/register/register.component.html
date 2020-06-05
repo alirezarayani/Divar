@@ -1,0 +1,62 @@
+<div class="container">
+    <form [formGroup]='inputForms' (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputFirstName">نام</label>
+                <input formControlName="firstName" type="text" class="form-control" id="inputFirstName">
+                <span *ngIf="inputForms.get('firstName')?.errors?.required && inputForms.get('firstName').touched">نام خود را وارد کنید*</span>
+                
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputlastName">نام خانوادگی</label>
+                <input formControlName="lastName" type="text" class="form-control" id="inputinputlastName">
+                <span *ngIf="inputForms.get('lastName')?.errors?.required && inputForms.get('lastName').touched">نام خانوادگی خود را وارد کنید</span>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">ایمیل</label>
+                <input formControlName='email' type="email" class="form-control" id="inputEmail4">
+                <span *ngIf="inputForms.get('email')?.errors?.required && inputForms.get('email').touched">ایمیل خود را وارد کنید</span>
+                <span *ngIf="inputForms.get('email')?.errors?.email && inputForms.get('email').touched">ایمیل خود را درست وارد کنید</span> 
+                <span *ngIf="inputForms.get('email')?.errors?.emailIsExists && inputForms.get('email').touched">ایمیل قبلا وارد شده است</span> 
+            </div>
+        </div>
+        <div formGroupName='passwordGroup'>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">رمز عبور</label>
+                    <input formControlName='password' type="password" class="form-control" id="inputPassword4">
+                    <span *ngIf="inputForms.get('passwordGroup.password')?.errors?.required && inputForms.get('passwordGroup.password').touched">رمز خود را وارد کنید</span>
+                
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputConfirmPassword">تکرار رمز عبور</label>
+                    <input formControlName='confirmPassword' type="password" class="form-control" id="inputConfirmPassword">
+                    <span *ngIf="inputForms.get('passwordGroup.confirmPassword')?.errors?.required && inputForms.get('passwordGroup.confirmPassword').touched">رمز خود را وارد کنید</span>
+                    <span *ngIf="inputForms.controls.passwordGroup?.errors?.notMatch && inputForms.get('passwordGroup.confirmPassword').touched">رمز ها یکسان نیستند </span>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inputProvince">استان</label>
+                <select formControlName='province' id="inputProvince" class="form-control">
+                    <option selected>استان خود را انتخاب کنید</option>
+                    <option *ngFor="let tempProvince of provinces" [ngValue]="tempProvince">{{tempProvince.name}}</option>
+                </select>
+                <span *ngIf="inputForms.get('province')?.errors?.required&& inputForms.get('province').touched" >استان خود را وارد کنید</span>
+            </div>
+            <!--  TODO :add state  -->
+            <!-- <div class="form-group col-md-4">
+                <label for="inputState">State</label>
+                <select id="inputState" class="form-control">
+                    <option selected>Choose...</option>
+                    <option>...</option>
+                </select>
+            </div> -->
+        </div>
+
+        <button type="submit" class="btn btn-primary">ثبت نام</button>
+    </form>
+</div>

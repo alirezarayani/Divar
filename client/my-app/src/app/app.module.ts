@@ -10,18 +10,16 @@ import { ElectronicDeviceComponent } from './component/category/electronic-devic
 import { CategoryComponent } from './component/category/category.component';
 import { CategoryService } from './services/category/category.service';
 import { ElectronicService } from './services/electronic/electronic.service';
-import { RegisterComponent } from './component/register/register.component';
-import { ProvinceService } from './services/province.service';
 import {ReactiveFormsModule} from '@angular/forms';
-import { UserComponent } from './component/user/user.component';
-import { UserService } from './services/user.service';
+import { AuthenticationModule } from './authentication/authentication.module';
+
 const route: Routes = [
   {
     path: "", component: HomeComponent, children: [{
       path: "electronic-devices", component: ElectronicDeviceComponent
     }]
   },
-  { path: "register", component: RegisterComponent}
+
 ]
 @NgModule({
   declarations: [
@@ -30,18 +28,17 @@ const route: Routes = [
     CategoryComponent,
     NavComponent,
     ElectronicDeviceComponent,
-    RegisterComponent,
-    UserComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AuthenticationModule,
     RouterModule.forRoot(route)
   ],
-  providers: [CategoryService, ElectronicService, ProvinceService,UserService],
+  providers: [CategoryService, ElectronicService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
