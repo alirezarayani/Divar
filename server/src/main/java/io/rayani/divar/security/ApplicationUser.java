@@ -1,5 +1,6 @@
-package io.rayani.divar.entity;
+package io.rayani.divar.security;
 
+import io.rayani.divar.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -7,6 +8,10 @@ import java.util.Collection;
 
 public class ApplicationUser implements UserDetails {
     User user=null;
+
+    public ApplicationUser() {
+    }
+
     public ApplicationUser(User user){
         this.user=user;
     }

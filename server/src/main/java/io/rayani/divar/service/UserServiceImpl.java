@@ -1,6 +1,6 @@
 package io.rayani.divar.service;
 
-import io.rayani.divar.entity.ApplicationUser;
+import io.rayani.divar.security.ApplicationUser;
 import io.rayani.divar.entity.User;
 import io.rayani.divar.reposiory.UserRepository;
 import io.rayani.divar.util.ConvertDtoAndEntity;

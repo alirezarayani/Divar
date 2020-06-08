@@ -1,5 +1,6 @@
 package io.rayani.divar.security;
 
+import io.rayani.divar.jwt.JwtTokenVerifier;
 import io.rayani.divar.jwt.JwtUsernameAndPasswordAuthenticationFilter;
 import io.rayani.divar.service.UserService;
 import org.springframework.context.annotation.Bean;
@@ -42,16 +43,12 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager()))
+                .addFilterAfter(new JwtTokenVerifier(),JwtUsernameAndPasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/api/**")
-                .permitAll()
+                .antMatchers("/api/**").permitAll()
                 .anyRequest()
                 .authenticated();
-
     }
-
-
-
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
@@ -60,6 +57,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(userService);
         return provider;
     }
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());

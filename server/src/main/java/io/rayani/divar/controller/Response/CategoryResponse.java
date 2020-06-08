@@ -5,6 +5,7 @@ import io.rayani.divar.entity.Category;
 public class CategoryResponse {
     private Long id;
     private String categoryName;
+    private String name;
     private String pic;
 
     public Long getId() {
@@ -29,6 +30,14 @@ public class CategoryResponse {
 
     public void setPic(String pic) {
         this.pic = pic;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

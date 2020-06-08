@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import io.rayani.divar.entity.User;
+import io.rayani.divar.security.ApplicationUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,10 +31,11 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         try {
-            User user = new ObjectMapper().readValue(request.getInputStream(), User.class);
+
+            User authenticationRequest = new ObjectMapper().readValue(request.getInputStream(), User.class);
             Authentication authentication=new UsernamePasswordAuthenticationToken(
-                    user.getEmail(),
-                    user.getPassword()
+                    authenticationRequest.getEmail(),
+                    authenticationRequest.getPassword()
             );
             Authentication authenticate = authenticationManager.authenticate(authentication);
             return authenticate;
@@ -45,13 +47,14 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+        String key = "securesecuresecuresecuresecuresecuresecure";
         String token = Jwts.builder()
                 .setSubject(authResult.getName())
                 .claim("test", "hello")
                 .setIssuedAt(new Date())
                 .setExpiration(java.sql.Date.valueOf(LocalDate.now().plusWeeks(2)))
-                .signWith(Keys.hmacShaKeyFor("securesecuresecuresecuresecuresecuresecure".getBytes()))
+                .signWith(Keys.hmacShaKeyFor(key.getBytes()))
                 .compact();
-        response.addHeader("authorization","Bearer "+token);
+        response.addHeader("Authorization","Bearer "+token);
     }
 }

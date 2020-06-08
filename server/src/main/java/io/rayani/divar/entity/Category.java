@@ -18,7 +18,7 @@ public class Category {
     private Long id;
 
     private String categoryName;
-
+    private String name;
     private String pic;
 
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
@@ -47,6 +47,14 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPic() {

@@ -4,6 +4,9 @@ import io.rayani.divar.controller.Response.ElectronicDeviceResponse;
 import io.rayani.divar.entity.ElectronicDevice;
 import io.rayani.divar.service.ElectronicDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.websocket.server.PathParam;
@@ -20,8 +23,9 @@ public class ElectronicDeviceController {
     }
 
     @GetMapping
-    public List<ElectronicDevice> electronicDevices(){
-        return electronicDeviceService.getElectronics();
+    public Page<ElectronicDevice> electronicDevices(@RequestParam("page") int page , @RequestParam("size")int size){
+        Pageable pageable= PageRequest.of(page,size);
+        return electronicDeviceService.getElectronics(pageable);
     }
     @GetMapping("/{id}")
     public ElectronicDevice getElectronicDevice(@PathVariable  Long id){
