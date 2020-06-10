@@ -1,2 +1,1 @@
-# Divar
-Spring boot and angular 9
+# Spring Boot API with Angular 9
