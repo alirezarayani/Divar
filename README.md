@@ -11,4 +11,4 @@ this application is implementation of [Divar](https://divar.ir/ "Divar's Homepag
 * [Contact](#contact)
 ## Prerequisites
 
-[Java 8 ](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html"Divar's Homepage") And [Node.js](https://nodejs.org/en/ "nodejs's Homepage")
+[Java 8](https://nodejs.org/en/ "nodejs's Homepage") And [Node.js](https://nodejs.org/en/ "nodejs's Homepage")
