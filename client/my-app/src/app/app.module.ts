@@ -6,18 +6,18 @@ import { HomeComponent } from './component/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { NavComponent } from './component/nav/nav.component';
-import { ElectronicDeviceComponent } from './component/category/electronic-device/electronic-device.component';
-import { CategoryComponent } from './component/category/category.component';
-import { CategoryService } from './services/category/category.service';
-import { ElectronicService } from './services/electronic/electronic.service';
-import {ReactiveFormsModule} from '@angular/forms';
+import { ElectronicDeviceComponent } from './category/electronic-device/electronic-device.component';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { ClientsComponent } from './component/clients/clients.component';
+import { CategoryModule } from './category/category.module';
 
 const route: Routes = [
   {
     path: "", component: HomeComponent, children: [{
       path: "electronic-devices", component: ElectronicDeviceComponent
-    }]
+    },
+      //  {path: "vehicles", component: VehiclesComponent},
+    ]
   },
 
 ]
@@ -25,19 +25,18 @@ const route: Routes = [
   declarations: [
     AppComponent,
     HomeComponent,
-    CategoryComponent,
     NavComponent,
-    ElectronicDeviceComponent,
+    ClientsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule,
     HttpClientModule,
+    CategoryModule,
     AuthenticationModule,
-    RouterModule.forRoot(route)
+    RouterModule.forRoot(route),
   ],
-  providers: [CategoryService, ElectronicService,
+  providers: [,
   ],
   bootstrap: [AppComponent]
 })

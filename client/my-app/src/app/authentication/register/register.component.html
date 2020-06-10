@@ -19,7 +19,7 @@
                 <input formControlName='email' type="email" class="form-control" id="inputEmail4">
                 <span *ngIf="inputForms.get('email')?.errors?.required && inputForms.get('email').touched">ایمیل خود را وارد کنید</span>
                 <span *ngIf="inputForms.get('email')?.errors?.email && inputForms.get('email').touched">ایمیل خود را درست وارد کنید</span> 
-                <span *ngIf="inputForms.get('email')?.errors?.emailIsExists && inputForms.get('email').touched">ایمیل قبلا وارد شده است</span> 
+                <span *ngIf="inputForms.get('email')?.errors?.emailIsExists && inputForms.get('email').touched">ایمیل تکراری است</span> 
             </div>
         </div>
         <div formGroupName='passwordGroup'>

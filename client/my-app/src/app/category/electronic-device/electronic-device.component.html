@@ -1,0 +1,53 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3" *ngFor="let tempElectronic of electronics">
+      <div class="card mb-4 box-shadow">
+        <img class="card-img-top"
+          data-src="holder.js/80px100?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
+          alt="Thumbnail [100%x225]" style="height: 225px; width: 100%; display: block;" src="{{tempElectronic.pic}}"
+          data-holder-rendered="true">
+        <div class="card-body">
+          <h6>{{tempElectronic.deviceName}}</h6>
+          <p class="card-text">{{tempElectronic.description}}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary">قیمت</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">مشاهده</button>
+            </div>
+            <small class="text-muted">9 mins</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <nav aria-label="...">
+  <ul style="margin-left: 180px;margin-top:-10px;" class="pagination"  *ngIf="pageClient?.content" >
+    <li *ngFor="let page of ' '.repeat(pageClient.totalPages).split(''), let i = index " (click)="onSelect(i)" [class.active]="i === selectedPage" class="page-item"><a class="page-link" >{{i}}</a></li>
+  </ul>
+</nav> -->
+
+<div class="footer-pagination">
+  <div class="col-md-6 mx-auto">
+    <div class="row">
+      <div class="col-md-9" style="padding-left: 30%;" *ngIf="electronics">
+
+        <ngb-pagination  class="d-flex justify-content-center "[(page)]="thePageNumber" [pageSize]="thePageSize" [maxSize]="5" [boundaryLinks]="true" [collectionSize]="theTotalElements"
+          (pageChange)="getElectronic()"></ngb-pagination>
+      </div>
+      <div class="col-md-3 mt-2 " style="text-align: right;">
+          <span class="mr-2">Page Size:</span>
+          <select (change)="updatePageSize($event.target.value)">
+            <option >1</option>
+            <option  selected=true>5</option>
+            <option >10</option>
+            <option >15</option>
+            <option >20</option>
+          </select>
+      </div>
+    </div>
+  </div>
+
+</div>

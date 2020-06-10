@@ -1,0 +1,50 @@
+
+<div style="margin-top:30px;" class="container">
+    <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Clients </h3>
+          <div class="pull-right">
+            <span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+            </span>
+          </div>
+        </div>
+        <div class="panel-body">
+          <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter Clients" />
+        </div>
+        <table class="table table-hover" id="dev-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Address</th>
+            </tr>
+          </thead>
+          <tbody  *ngIf="pageClient?.content">
+            <tr *ngFor="let client of pageClient.content">
+              <td>{{client.code}}</td>
+              <td>{{client.nom}}</td>
+              <td>{{client.prenom}}</td>
+              <td>{{client.address}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<nav aria-label="...">
+  <ul style="margin-left: 180px;margin-top:-10px;" class="pagination"  *ngIf="pageClient?.content" >
+    <li *ngFor="let page of ' '.repeat(pageClient.totalPages).split(''), let i = index " (click)="onSelect(i)" [class.active]="i === selectedPage" class="page-item"><a class="page-link" href="#">{{i}}</a></li>
+  </ul>
+</nav>
+<nav aria-label="Page navigation example">
+  <ul class="pagination"  *ngIf="pageClient?.content">
+    <li (click)="onSelect(pageClient.number-1)"  class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li *ngFor="let page of ' '.repeat(pageClient.totalPages).split(''), let i = index " (click)="onSelect(i)"  [class.active]="i === selectedPage" class="page-item"><a class="page-link" href="#">{{i}}</a></li>
+
+    <li  (click)="onSelect(pageClient.number+1)" class="page-item"><a class="page-link" href="#">Next</a></li>
+  </ul>
+</nav>

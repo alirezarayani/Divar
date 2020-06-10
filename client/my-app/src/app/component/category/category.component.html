@@ -1,8 +1,0 @@
-<a routerLink="#">
-    <p>دسته بندی ها</p>
-</a>
-<div  *ngFor="let tempCategory of categories">
-    <a #find routerLink="{{tempCategory.id}}">{{tempCategory.categoryName}}
-        <img src="{{tempCategory.pic}}" alt="{{tempCategory.categoryName}}">
-    </a>
-</div>

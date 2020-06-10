@@ -62,7 +62,7 @@ export class RegisterComponent implements OnInit {
     this.postUser(this.user)
   }
   checkEmail(contorl: FormControl): Promise<any> | Observable<any> {
-    let promise: Promise<any>;
+   
     return new Promise(resolve => {
       this.registerService.EmailIsExists(contorl.value).subscribe(
         user => {
