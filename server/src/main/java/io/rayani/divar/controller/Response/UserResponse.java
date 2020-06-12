@@ -5,26 +5,34 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.Set;
 
 public class UserResponse {
 
-    private long id;
+
+    @NotBlank
+    @Size(max = 50)
     private String firstName;
+    @NotBlank
+    @Size(max = 50)
     private String lastName;
+    @Size(max = 50)
+    @Email
     private String email;
+    @NotBlank
+    @Size(min = 6, max = 40)
     private String password;
-    private String doublePassword;
+    @Size(min = 6, max = 40)
+    private String ConfirmPassword;
+    @NotBlank
     private Province province;
+    private Set<String> role;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -58,12 +66,12 @@ public class UserResponse {
         this.password = password;
     }
 
-    public String getDoublePassword() {
-        return doublePassword;
+    public String getConfirmPassword() {
+        return ConfirmPassword;
     }
 
-    public void setDoublePassword(String doublePassword) {
-        this.doublePassword = doublePassword;
+    public void setConfirmPassword(String confirmPassword) {
+        ConfirmPassword = confirmPassword;
     }
 
     public Province getProvince() {
@@ -72,5 +80,13 @@ public class UserResponse {
 
     public void setProvince(Province province) {
         this.province = province;
+    }
+
+    public Set<String> getRole() {
+        return role;
+    }
+
+    public void setRole(Set<String> role) {
+        this.role = role;
     }
 }

@@ -11,7 +11,8 @@ import java.util.Optional;
 
 public interface UserService extends UserDetailsService  {
     List<User> getAllUsers();
-    Optional<? extends User> getUserByEmail(String email) throws NotfoundException;
+    User getUserByEmail(String email) throws NotfoundException;
+    Boolean existsByEmail(String email);
     User getUserById(Long id);
     User saveUser(User user);
     User updateUser(User user);
